@@ -1,0 +1,45 @@
+{
+  "name": "express-notifications",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "author": {
+    "name": "Mario Brino",
+    "email": "mariobrino@gmail.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx --env-file .env --watch src/server.ts",
+    "build": "tsc --project tsconfig.build.json",
+    "postbuild": "tsc-alias -p tsconfig.build.json --resolve-full-paths",
+    "preview": "NODE_ENV=production node --env-file .env dist/server.js",
+    "start": "NODE_ENV=production node dist/server.js",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.2",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.12.0",
+    "jiti": "^2.7.0",
+    "prettier": "^3.9.8",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "tsc-alias": "^1.9.5",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.1"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "fsevents@2.3.3": true
+  }
+}
