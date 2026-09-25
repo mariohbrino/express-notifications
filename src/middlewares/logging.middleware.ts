@@ -1,6 +1,6 @@
 import morgan from "morgan";
 
-import { logger } from "@/utils/logger.util";
+import { logger } from "@/services/logger.service";
 
 export const httpLoggingMiddleware = () => {
   const morganStream = {

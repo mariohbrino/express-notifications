@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type Express } from "express";
 
 import { routes } from "@/routes/index.route";
 import {
@@ -10,7 +10,7 @@ import { requestMiddleware } from "./middlewares/request.middleware";
 import { responseMiddleware } from "./middlewares/response.middleware";
 
 // Create an instance of the Express application
-const app = express();
+const app: Express = express();
 
 // Apply middlewares
 app.use(requestMiddleware());

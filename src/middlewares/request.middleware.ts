@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 
-import { logger, loggerStorage } from "@/utils/logger.util";
+import { logger, loggerStorage } from "@/services/logger.service";
 
 const getRequestId = (
   requestIdHeader: Request["headers"]["x-request-id"],

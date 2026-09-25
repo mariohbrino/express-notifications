@@ -1,5 +1,5 @@
 import { app } from "@/app";
-import { logger } from "@/utils/logger.util";
+import { logger } from "@/services/logger.service";
 
 const NODE_ENV = process.env["NODE_ENV"]?.toLowerCase() || "production";
 const PORT = process.env["PORT"] || 3000;
