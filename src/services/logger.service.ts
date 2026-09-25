@@ -22,5 +22,3 @@ export const logger = winston.createLogger({
     new winston.transports.File({ filename: "./storage/logs/app.log" }), // Automatically saves to a file
   ],
 });
-
-export type Logger = typeof logger;

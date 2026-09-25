@@ -1,6 +1,6 @@
 import type { Server } from "http";
 
-import type { Logger } from "@/services/logger.service";
+import type { Logger } from "@/types/logger.type";
 
 export const setupGracefulShutdown = (server: Server, logger: Logger) => {
   const handler = async (signal: string) => {
