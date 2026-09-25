@@ -18,7 +18,10 @@
     "format:fix": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --reporter=verbose",
+    "test:units": "vitest run --reporter=verbose --project=unit-tests --coverage",
+    "test:features": "vitest run --reporter=verbose --project=feature-tests --coverage"
   },
   "dependencies": {
     "express": "^5.2.1",
@@ -31,6 +34,7 @@
     "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",
     "@types/node": "^26.6.2",
+    "@vitest/coverage-v8": "^5.0.2",
     "eslint": "^10.11.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.12.0",
@@ -40,7 +44,8 @@
     "tsc-alias": "^1.9.5",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.70.1"
+    "typescript-eslint": "^8.70.1",
+    "vitest": "^5.0.2"
   },
   "allowScripts": {
     "esbuild@0.28.2": true,
