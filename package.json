@@ -20,8 +20,9 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --reporter=verbose",
-    "test:units": "vitest run --reporter=verbose --project=unit-tests --coverage",
-    "test:features": "vitest run --reporter=verbose --project=feature-tests --coverage"
+    "test:units": "vitest run --reporter=verbose --project=unit-tests",
+    "test:features": "vitest run --reporter=verbose --project=feature-tests",
+    "test:coverage": "vitest run --reporter=verbose --coverage"
   },
   "dependencies": {
     "express": "^5.2.1",
