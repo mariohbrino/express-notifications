@@ -12,7 +12,10 @@ const server: Server = app.listen(PORT, async () => {
   try {
     logger.info(`Server is running at http://localhost:${PORT}`);
     logger.info(`Environment: ${NODE_ENV}`);
-    logger.info("Press Ctrl+C to stop the server.");
+
+    if (NODE_ENV === "development") {
+      logger.info("Press Ctrl+C to stop the server.");
+    }
   } catch (error) {
     if (error instanceof Error) {
       logger.error(error.stack ?? error.message);
