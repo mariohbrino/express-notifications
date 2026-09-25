@@ -5,14 +5,18 @@ import {
   errorHandlerMiddleware,
   handleNotFoundMiddleware,
 } from "./middlewares/error.middleware";
+import { httpLoggingMiddleware } from "./middlewares/logging.middleware";
+import { requestMiddleware } from "./middlewares/request.middleware";
 import { responseMiddleware } from "./middlewares/response.middleware";
 
 // Create an instance of the Express application
 const app = express();
 
 // Apply middlewares
+app.use(requestMiddleware());
 app.use(express.json());
-app.use(responseMiddleware);
+app.use(httpLoggingMiddleware());
+app.use(responseMiddleware());
 
 // Register the main router
 app.use(routes);

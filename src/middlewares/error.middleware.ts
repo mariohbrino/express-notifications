@@ -50,10 +50,10 @@ export const errorHandlerMiddleware = (
   const status = error.status || 500;
 
   if (status === 404) {
-    console.warn(error.message);
+    request.logger.warn(error.message);
   } else {
-    console.error("Error occurred:", error.message);
-    console.error("Stack trace:", error.stack);
+    request.logger.error(`Error occurred: ${error.message}`);
+    request.logger.error(`Stack trace: ${error.stack}`);
   }
 
   // Prepare data for the JSON response
