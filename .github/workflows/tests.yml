@@ -1,4 +1,4 @@
-name: Check Lint and Format
+name: Node Tests
 
 on:
   push:
@@ -10,8 +10,8 @@ env:
   FORCE_COLOR: true
 
 jobs:
-  lint:
-    name: Lint checks
+  unit-tests:
+    name: Unit Tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -27,11 +27,12 @@ jobs:
           cache: "npm"
       - name: Install node dependencies
         run: npm ci
-      - name: Run lint and format checks
-        run: npm run lint
+      - name: Run unit tests
+        run: npm run test:units
 
-  format:
-    name: Format Checks
+  feature-tests:
+    name: Feature Tests
+    needs: unit-tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -47,11 +48,11 @@ jobs:
           cache: "npm"
       - name: Install node dependencies
         run: npm ci
-      - name: Run format check
-        run: npm run format
+      - name: Run feature tests
+        run: npm run test:features
 
-  typecheck:
-    name: Type Check
+  build-test:
+    name: Build Test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -68,6 +69,6 @@ jobs:
       - name: Install node dependencies
         run: npm ci
       - name: Copy .env file
-        run: cp .env.example .env
-      - name: Run type check
-        run: npm run typecheck
+        run: cp .env-ci.example .env
+      - name: Build test
+        run: npm run build
