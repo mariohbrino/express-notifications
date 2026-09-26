@@ -1,0 +1,17 @@
+.dockerignore
+.env
+.env.example
+.git
+.github
+.gitignore
+.prettierignore
+.prettierrc
+.vscode
+coverage
+dist
+docker-compose.yml
+Dockerfile
+node_modules
+storage
+tests
+vitest.config.ts

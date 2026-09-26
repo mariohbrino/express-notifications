@@ -1,0 +1,22 @@
+networks:
+  internal:
+    driver: bridge
+
+services:
+  backend:
+    image: mariohbrino/express-notifications:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deploy
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    container_name: backend
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    env_file: .env
+    entrypoint: ["npm", "run", "start"]
+    networks:
+      - internal
