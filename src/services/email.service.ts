@@ -9,24 +9,19 @@ import type { Logger } from "winston";
 import type { IEmailProvider } from "@/types/email.type";
 
 export class EmailService implements IEmailProvider {
-  #sesClient: SESClient;
   #logger: Logger;
+  #sesClient: SESClient;
   #emailFromName: string;
   #emailFromAddress: string;
 
   constructor(
     logger: Logger,
-    region: string,
-    accessKeyId: string,
-    secretAccessKey: string,
+    sesClient: SESClient,
     emailFromName: string,
     emailFromAddress: string,
   ) {
-    this.#sesClient = new SESClient({
-      region: region,
-      credentials: { accessKeyId, secretAccessKey },
-    });
     this.#logger = logger;
+    this.#sesClient = sesClient;
     this.#emailFromName = emailFromName;
     this.#emailFromAddress = emailFromAddress;
   }
