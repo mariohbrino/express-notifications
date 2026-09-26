@@ -14,7 +14,7 @@ export class LoggerService {
     this.#storage.run({ requestId }, callback);
   };
 
-  createLogger = () => {
+  createLogger = (filename: string) => {
     return winston.createLogger({
       level: "info",
       // Format Winston output to automatically pull the current Request ID if it exists
@@ -30,7 +30,7 @@ export class LoggerService {
       ),
       transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: "./storage/logs/app.log" }), // Automatically saves to a file
+        new winston.transports.File({ filename, lazy: true }), // Automatically saves to a file
       ],
     });
   };

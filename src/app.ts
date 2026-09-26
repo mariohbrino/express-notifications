@@ -18,7 +18,7 @@ const app: Express = express();
 
 // Create the logger service and the application container with the logger instance
 const loggerService = new LoggerService();
-const logger: Logger = loggerService.createLogger();
+const logger: Logger = loggerService.createLogger("./storage/logs/app.log");
 const container: AppContainer = createContainer(logger);
 
 // Apply middlewares
