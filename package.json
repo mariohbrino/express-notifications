@@ -38,6 +38,7 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^26.6.2",
     "@vitest/coverage-v8": "^5.0.2",
+    "aws-sdk-client-mock": "^4.1.0",
     "eslint": "^10.11.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.12.0",
