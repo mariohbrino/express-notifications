@@ -1,4 +1,5 @@
 import { type NextFunction, type Request, type Response } from "express";
+import type { Logger } from "winston";
 
 type ErrorContext = {
   title: string;
@@ -37,35 +38,37 @@ export const handleNotFoundMiddleware = (
  * @param response The response object
  * @param _next The next middleware function (not used)
  */
-export const errorHandlerMiddleware = (
-  error: HttpError,
-  request: Request,
-  response: Response,
-  next: NextFunction,
-): Response => {
-  void request;
-  void next;
+export const errorHandlerMiddleware = (logger: Logger) => {
+  return (
+    error: HttpError,
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Response => {
+    void request;
+    void next;
 
-  // Determine status
-  const status = error.status || 500;
+    // Determine status
+    const status = error.status || 500;
 
-  if (status === 404) {
-    request.logger.warn(error.message);
-  } else {
-    request.logger.error(`Error occurred: ${error.message}`);
-    request.logger.error(`Stack trace: ${error.stack}`);
-  }
+    if (status === 404) {
+      logger.warn(error.message);
+    } else {
+      logger.error(`Error occurred: ${error.message}`);
+      logger.error(`Stack trace: ${error.stack}`);
+    }
 
-  // Prepare data for the JSON response
-  const context: ErrorContext = {
-    title: status === 404 ? "Page Not Found" : "Server Error",
-    error: error.message,
+    // Prepare data for the JSON response
+    const context: ErrorContext = {
+      title: status === 404 ? "Page Not Found" : "Server Error",
+      error: error.message,
+    };
+
+    if (process.env["NODE_ENV"] === "development") {
+      context.stack = JSON.stringify(error.stack, null, 2);
+    }
+
+    // Send the appropriate error response as JSON
+    return response.status(status).json({ context });
   };
-
-  if (process.env["NODE_ENV"] === "development") {
-    context.stack = JSON.stringify(error.stack, null, 2);
-  }
-
-  // Send the appropriate error response as JSON
-  return response.status(status).json({ context });
 };

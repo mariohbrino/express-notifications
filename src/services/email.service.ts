@@ -4,9 +4,9 @@ import {
   type SendEmailCommandInput,
   type SendEmailCommandOutput,
 } from "@aws-sdk/client-ses";
+import type { Logger } from "winston";
 
 import type { IEmailProvider } from "@/types/email.type";
-import type { Logger } from "@/types/logger.type";
 
 export class EmailService implements IEmailProvider {
   #sesClient: SESClient;

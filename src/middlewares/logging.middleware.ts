@@ -1,8 +1,7 @@
 import morgan from "morgan";
+import type { Logger } from "winston";
 
-import { logger } from "@/services/logger.service";
-
-export const httpLoggingMiddleware = () => {
+export const httpLoggingMiddleware = (logger: Logger) => {
   const morganStream = {
     write: (message: string) => {
       // Strip trailing newline character that Morgan automatically appends

@@ -1,10 +1,10 @@
-import { EmailService } from "@/services/email.service";
-import { logger } from "@/services/logger.service";
+import type { Logger } from "winston";
 
 import { loadEmailConfig, type EmailConfig } from "@/configs/email.config";
+import { EmailService } from "@/services/email.service";
 import type { AppContainer } from "@/types/app-container.type";
 
-export const createContainer = (): AppContainer => {
+export const createContainer = (logger: Logger): AppContainer => {
   const emailConfig: EmailConfig = loadEmailConfig();
   const emailService = new EmailService(
     logger,
@@ -15,6 +15,7 @@ export const createContainer = (): AppContainer => {
     emailConfig.fromAddress,
   );
   return {
+    logger,
     emailService,
   };
 };
