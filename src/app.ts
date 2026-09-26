@@ -1,6 +1,8 @@
-import express, { type Express } from "express";
+import express, { type Express, type Router } from "express";
 
-import { routes } from "@/routes/index.route";
+import { createContainer } from "@/container";
+import { createRoutes } from "@/routes/index.route";
+import type { AppContainer } from "@/types/app-container.type";
 import {
   errorHandlerMiddleware,
   handleNotFoundMiddleware,
@@ -18,7 +20,11 @@ app.use(express.json());
 app.use(httpLoggingMiddleware());
 app.use(responseMiddleware());
 
-// Register the main router
+// Create the application container and routes
+const container: AppContainer = createContainer();
+const routes: Router = createRoutes(container);
+
+// Apply the routes to the Express application
 app.use(routes);
 
 // Handle 404 and other errors

@@ -1,9 +1,13 @@
-import express from "express";
+import { Router } from "express";
 
-import { index } from "@/controllers/home.controller";
+import { HomeController } from "@/controllers/home.controller";
+import type { AppContainer } from "@/types/app-container.type";
 
-const router = express.Router();
+const createHomeRoutes = (container: AppContainer) => {
+  const router = Router();
+  const homeController = new HomeController(container);
+  router.get("/", homeController.index);
+  return router;
+};
 
-router.get("/", index);
-
-export { router as homeRoutes };
+export { createHomeRoutes };

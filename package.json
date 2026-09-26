@@ -25,10 +25,12 @@
     "test:coverage": "vitest run --reporter=verbose --coverage"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1141.0",
     "express": "^5.2.1",
     "morgan": "^1.12.1",
     "uuid": "^14.0.2",
-    "winston": "^3.19.0"
+    "winston": "^3.19.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
