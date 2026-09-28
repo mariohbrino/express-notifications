@@ -27,6 +27,8 @@ jobs:
           cache: "npm"
       - name: Install node dependencies
         run: npm ci
+      - name: Copy .env file
+        run: cp .env.actions .env.testing
       - name: Run unit tests
         run: npm run test:units
 
@@ -39,6 +41,17 @@ jobs:
         os: [ubuntu-latest]
         node-version: ["26.6.0"]
 
+    services:
+      redis:
+        image: redis:8.8.3
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 3
+
     steps:
       - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
@@ -48,6 +61,8 @@ jobs:
           cache: "npm"
       - name: Install node dependencies
         run: npm ci
+      - name: Copy .env file
+        run: cp .env.actions .env.testing
       - name: Run feature tests
         run: npm run test:features
 
@@ -69,6 +84,6 @@ jobs:
       - name: Install node dependencies
         run: npm ci
       - name: Copy .env file
-        run: cp .env.example .env
+        run: cp .env.actions .env
       - name: Build test
         run: npm run build
