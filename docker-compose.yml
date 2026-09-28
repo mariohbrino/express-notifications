@@ -2,6 +2,9 @@ networks:
   internal:
     driver: bridge
 
+volumes:
+  redis_data:
+
 services:
   backend:
     image: mariohbrino/express-notifications:dev
@@ -18,5 +21,18 @@ services:
     restart: unless-stopped
     env_file: .env
     entrypoint: ["npm", "run", "start"]
+    networks:
+      - internal
+
+  cache:
+    image: redis:8.8.3
+    container_name: cache
+    restart: unless-stopped
+    ports:
+      - 6380:6379
+    command: ["redis-server", "--aclfile", "/usr/local/etc/redis/users.acl"]
+    volumes:
+      - redis_data:/data
+      - ./redis/users.acl:/usr/local/etc/redis/users.acl:ro
     networks:
       - internal
